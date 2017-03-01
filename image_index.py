@@ -9,8 +9,8 @@ import cPickle as pickle
 
 ########################
 # module: image_index.py
-# Your Name
-# Your A-Number
+# David Browning
+# TODO add A# before submission
 ########################
 
 ap = argparse.ArgumentParser()
@@ -20,10 +20,13 @@ ap.add_argument('-hsv', '--hsv', required = True, help = 'hsv index file to pick
 ap.add_argument('-gsl', '--gsl', required = True, help = 'gsl index file to pickle')
 args = vars(ap.parse_args())
 
-def generate_file_names(fnpat, rootdir):
-  # your code
-  pass
+def find_files(filepat, rootdir):
+    for path, dirlist, filelist in os.walk(rootdir):
+        for file_name in fnmatch.filter(filelist, filepat):
+            yield os.path.join(path, file_name)
 
+def generate_file_names(fnpat, rootdir):
+    return find_files(fnpat, rootdir)
 
 ## three index dictionaries
 HSV_INDEX = {}
@@ -76,5 +79,5 @@ if __name__ == '__main__':
   with open(args['gsl'], 'wb') as gslfile:
     pickle.dump(GSL_INDEX, gslfile)
   print('indexing finished')
-    
+
 
