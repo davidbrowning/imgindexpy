@@ -6,6 +6,8 @@ import sys
 import os
 import re
 import cPickle as pickle
+import fnmatch
+
 
 ########################
 # module: image_index.py
